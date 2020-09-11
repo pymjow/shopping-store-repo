@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org.spring.framework.web: debug
+
+
+com:
+  oauth2:
+    client-id: test
+    client-secret: test
+    client-scopes: read,write

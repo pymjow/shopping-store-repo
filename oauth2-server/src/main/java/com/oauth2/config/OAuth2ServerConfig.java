@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 
 @Configuration
 @EnableAuthorizationServer
@@ -21,10 +22,13 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final AuthenticationManager authenticationManager;
 
-    public OAuth2ServerConfig(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, OAuth2ConfigProperties properties) {
+    private final AccessTokenConverter accessTokenConverter;
+
+    public OAuth2ServerConfig(AccessTokenConverter accessTokenConverter, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, OAuth2ConfigProperties properties) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.properties = properties;
+        this.accessTokenConverter = accessTokenConverter;
     }
 
 
@@ -47,6 +51,7 @@ public class OAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager);
+        endpoints.authenticationManager(authenticationManager)
+                .accessTokenConverter(accessTokenConverter);
     }
 }

@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = OAuth2Server.class)
 @AutoConfigureMockMvc
-public class LoginTest {
+public class TokenEndpointTest {
 
     @Autowired
     private MockMvc mockMvc;

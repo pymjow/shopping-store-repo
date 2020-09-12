@@ -11,3 +11,5 @@ com:
     client-id: test
     client-secret: test
     client-scopes: read,write
+    key-size: 1024
+    key-id: AF2IJS23FJS

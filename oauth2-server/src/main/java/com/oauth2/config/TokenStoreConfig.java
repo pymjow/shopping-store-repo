@@ -21,12 +21,10 @@ public class TokenStoreConfig {
 
     @Bean
     public KeyPair keyPair() throws NoSuchAlgorithmException {
-
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         SecureRandom random = new SecureRandom();
         keyPairGenerator.initialize(oAuth2ConfigProperties.getKeySize(), random);
         return keyPairGenerator.generateKeyPair();
-
     }
 
     @Bean

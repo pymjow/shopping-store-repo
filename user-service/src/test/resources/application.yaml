@@ -1,0 +1,4 @@
+logging:
+  level:
+    org.spring.framework.web: debug
+

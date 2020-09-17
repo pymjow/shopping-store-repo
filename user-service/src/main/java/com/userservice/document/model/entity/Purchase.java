@@ -51,4 +51,10 @@ public class Purchase {
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
+
+    @PrePersist
+    public void intDefaults() {
+        this.creationDate = LocalDate.now();
+    }
+
 }

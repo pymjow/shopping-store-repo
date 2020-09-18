@@ -1,0 +1,16 @@
+server:
+  port: 8761
+
+logging:
+  level:
+    org.spring.framework.web: debug
+    com.netflix.eureka: off
+    com.netflix.discovery: off
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+
+

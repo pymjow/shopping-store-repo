@@ -14,6 +14,7 @@ public class User {
     private UserCredentials userCredentials;
     private AccountState accountState;
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {

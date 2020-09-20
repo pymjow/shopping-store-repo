@@ -10,6 +10,15 @@ public class AccountState {
     private Boolean locked;
     private Boolean expired;
 
+    public AccountState() {
+    }
+
+    public AccountState(Boolean enabled, Boolean locked, Boolean expired) {
+        this.enabled = enabled;
+        this.locked = locked;
+        this.expired = expired;
+    }
+
     @Column
     public Boolean getEnabled() {
         return enabled;

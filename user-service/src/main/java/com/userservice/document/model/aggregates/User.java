@@ -1,10 +1,12 @@
 package com.userservice.document.model.aggregates;
 
 import com.userservice.document.model.entity.UserProfile;
+import com.userservice.document.model.entity.UserRole;
 import com.userservice.document.model.valueobjects.AccountState;
 import com.userservice.document.model.valueobjects.UserCredentials;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -13,6 +15,7 @@ public class User {
     private UserProfile userProfile;
     private UserCredentials userCredentials;
     private AccountState accountState;
+    private List<UserRole> userRoleList;
 
 
     @Id
@@ -51,5 +54,14 @@ public class User {
 
     public void setAccountState(AccountState accountState) {
         this.accountState = accountState;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public List<UserRole> getUserRoleList() {
+        return userRoleList;
+    }
+
+    public void setUserRoleList(List<UserRole> userRoleList) {
+        this.userRoleList = userRoleList;
     }
 }

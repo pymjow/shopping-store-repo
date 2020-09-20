@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -55,8 +56,15 @@ public class UserTest {
         user = userRepository.save(user);
 
         Assertions.assertThat(user.getId()).isNotNull();
-
     }
 
+    @Test
+    public void testFetchByUsername(){
+
+        String username="test";
+        Optional<User> user=userRepository.findByUsername(username);
+        Assertions.assertThat(user.isPresent()).isEqualTo(true);
+        Assertions.assertThat(user.get().getUserRoleList().isEmpty()).isEqualTo(false);
+    }
 
 }

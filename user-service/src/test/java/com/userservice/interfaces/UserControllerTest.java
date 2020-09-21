@@ -57,10 +57,15 @@ public class UserControllerTest {
 
         MultiValueMap<String,String> params=new LinkedMultiValueMap<>();
         params.add("username",username);
-        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/users/username").params(params))
-                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/username").params(params))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.password").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.enabled").exists());
+
 
     }
+
 
 
 

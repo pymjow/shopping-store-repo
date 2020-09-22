@@ -11,6 +11,14 @@ public class UserRole {
     private User user;
     private String authority;
 
+    public UserRole() {
+
+    }
+
+    public UserRole(String authority) {
+        this.authority = authority;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {

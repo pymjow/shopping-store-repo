@@ -1,5 +1,6 @@
 package com.userservice.document.model.aggregates;
 
+import com.userservice.document.model.commands.CreateUserCommand;
 import com.userservice.document.model.entity.UserProfile;
 import com.userservice.document.model.entity.UserRole;
 import com.userservice.document.model.valueobjects.AccountState;
@@ -7,6 +8,7 @@ import com.userservice.document.model.valueobjects.UserCredentials;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class User {
@@ -17,6 +19,27 @@ public class User {
     private AccountState accountState;
     private List<UserRole> userRoleList;
 
+    public User() {
+
+    }
+
+    public User(CreateUserCommand createUserCommand) {
+
+        this.setUserCredentials(createUserCommand.extractUserCredentials());
+        this.setAccountState(new AccountState(true, false, false));
+        List<UserRole> roles = createUserCommand.getRoles().stream().map(UserRole::new).collect(Collectors.toList());
+        for (UserRole userRole : roles) {
+            userRole.setUser(this);
+        }
+        this.setUserRoleList(roles);
+
+        UserProfile profile = new UserProfile();
+        profile.setPersonalInfo(createUserCommand.extractPersonInfo());
+        profile.setLocation(createUserCommand.extractLocation());
+        profile.setContact(createUserCommand.extractContact());
+        profile.setUser(this);
+        this.setUserProfile(profile);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +79,7 @@ public class User {
         this.accountState = accountState;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     public List<UserRole> getUserRoleList() {
         return userRoleList;
     }
@@ -64,4 +87,5 @@ public class User {
     public void setUserRoleList(List<UserRole> userRoleList) {
         this.userRoleList = userRoleList;
     }
+
 }

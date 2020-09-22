@@ -1,5 +1,6 @@
 package com.userservice.document.model.entity;
 
+import com.userservice.document.model.aggregates.User;
 import com.userservice.document.model.valueobjects.Contact;
 import com.userservice.document.model.valueobjects.Location;
 import com.userservice.document.model.valueobjects.PersonalInfo;
@@ -7,6 +8,7 @@ import com.userservice.document.model.valueobjects.PersonalInfo;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class UserProfile {
@@ -15,6 +17,7 @@ public class UserProfile {
     private PersonalInfo personalInfo;
     private Contact contact;
     private Location location;
+    private User user;
 
     @Id
     public Long getId() {
@@ -52,5 +55,12 @@ public class UserProfile {
         this.location = location;
     }
 
+    @OneToOne(mappedBy = "userProfile")
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

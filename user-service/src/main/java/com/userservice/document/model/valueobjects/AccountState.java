@@ -11,6 +11,7 @@ public class AccountState {
     private Boolean expired;
 
     public AccountState() {
+
     }
 
     public AccountState(Boolean enabled, Boolean locked, Boolean expired) {

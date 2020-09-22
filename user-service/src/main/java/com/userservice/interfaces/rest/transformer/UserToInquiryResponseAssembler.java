@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 public class UserToInquiryResponseAssembler {
 
-    public static UserInquiryResponse toUserInquiryResponse(User user){
+    public static UserInquiryResponse toUserInquiryResponse(User user) {
 
-        UserInquiryResponse userInquiryResponse=new UserInquiryResponse();
+        UserInquiryResponse userInquiryResponse = new UserInquiryResponse();
         userInquiryResponse.setEnabled(user.getAccountState().getEnabled());
         userInquiryResponse.setLocked(user.getAccountState().getLocked());
         userInquiryResponse.setExpired(user.getAccountState().getExpired());

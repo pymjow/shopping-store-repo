@@ -59,10 +59,10 @@ public class UserTest {
     }
 
     @Test
-    public void testFetchByUsername(){
+    public void testFetchByUsername() {
 
-        String username="test";
-        Optional<User> user=userRepository.findByUsername(username);
+        String username = "test";
+        Optional<User> user = userRepository.findByUsername(username);
         Assertions.assertThat(user.isPresent()).isEqualTo(true);
         Assertions.assertThat(user.get().getUserRoleList().isEmpty()).isEqualTo(false);
     }

@@ -9,21 +9,20 @@ import java.util.Optional;
 @Service
 public class UserQueryService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public UserQueryService(UserRepository userRepository){
-        this.userRepository=userRepository;
+    public UserQueryService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User findByUsername(String username){
-        Optional<User> user= userRepository.findByUsername(username);
-        if(!user.isPresent()){
+    public User findByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (!user.isPresent()) {
             throw new RuntimeException("user is not found");
         }
 
         return user.get();
     }
-
 
 
 }

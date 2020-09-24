@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.userservice.application.internal.commandservice.UserCommandService;
 import com.userservice.application.internal.queryservice.UserQueryService;
+import com.userservice.config.ResourceServerConfig;
 import com.userservice.document.model.aggregates.User;
 import com.userservice.document.model.entity.UserRole;
 import com.userservice.document.model.valueobjects.AccountState;
@@ -17,10 +18,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.filter.TypeExcludeFilters;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -32,6 +39,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
@@ -98,7 +106,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(value = "test")
+    @WithMockUser("test")
     public void testCreateUser() throws Exception {
 
         setupCreateUser();
@@ -121,11 +129,16 @@ public class UserControllerTest {
         String body = objectMapper.writeValueAsString(request);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/users/create")
-                .with(csrf()).content(body).contentType(MediaType.APPLICATION_JSON_VALUE))
+                .with(csrf())
+                .content(body)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.userId").exists());
 
     }
+
+
+
 
 
 }

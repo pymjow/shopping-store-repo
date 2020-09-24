@@ -4,6 +4,9 @@ import com.userservice.document.model.valueobjects.Contact;
 import com.userservice.document.model.valueobjects.Location;
 import com.userservice.document.model.valueobjects.PersonalInfo;
 import com.userservice.document.model.valueobjects.UserCredentials;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -104,9 +107,10 @@ public class CreateUserCommand {
     }
 
     public UserCredentials extractUserCredentials() {
+        PasswordEncoder passwordEncoder= PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserCredentials userCredentials = new UserCredentials();
         userCredentials.setUsername(this.username);
-        userCredentials.setPassword(this.password);
+        userCredentials.setPassword(passwordEncoder.encode(this.password));
         return userCredentials;
     }
 

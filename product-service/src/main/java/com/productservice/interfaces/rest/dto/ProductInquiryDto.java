@@ -1,26 +1,14 @@
-package com.productservice.document.model.valueobjects;
+package com.productservice.interfaces.rest.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import java.time.LocalDate;
 
-@Embeddable
-public class ProductSpecification {
+public class ProductInquiryDto {
 
     private String name;
     private Double price;
     private LocalDate manufactureDate;
+    private String color;
 
-    public ProductSpecification() {
-    }
-
-    public ProductSpecification(String name, Double price, LocalDate manufactureDate) {
-        this.name = name;
-        this.price = price;
-        this.manufactureDate = manufactureDate;
-    }
-
-    @Column
     public String getName() {
         return name;
     }
@@ -29,7 +17,6 @@ public class ProductSpecification {
         this.name = name;
     }
 
-    @Column
     public Double getPrice() {
         return price;
     }
@@ -38,12 +25,19 @@ public class ProductSpecification {
         this.price = price;
     }
 
-    @Column
     public LocalDate getManufactureDate() {
         return manufactureDate;
     }
 
     public void setManufactureDate(LocalDate manufactureDate) {
         this.manufactureDate = manufactureDate;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

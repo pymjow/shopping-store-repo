@@ -5,13 +5,15 @@ import com.userservice.document.model.entity.UserProfile;
 import com.userservice.document.model.entity.UserRole;
 import com.userservice.document.model.valueobjects.AccountState;
 import com.userservice.document.model.valueobjects.UserCredentials;
+import com.userservice.shareddomain.event.UserCreatedEvent;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-public class User {
+public class User extends AbstractAggregateRoot<User> {
 
     private Long id;
     private UserProfile userProfile;
@@ -39,6 +41,7 @@ public class User {
         profile.setContact(createUserCommand.extractContact());
         profile.setUser(this);
         this.setUserProfile(profile);
+
     }
 
     @Id
@@ -87,5 +90,9 @@ public class User {
     public void setUserRoleList(List<UserRole> userRoleList) {
         this.userRoleList = userRoleList;
     }
+
+
+
+
 
 }

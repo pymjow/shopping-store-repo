@@ -48,4 +48,5 @@ public class ProductRepositoryTest {
         Assertions.assertThat(product.getId()).isNotNull();
 
     }
+
 }

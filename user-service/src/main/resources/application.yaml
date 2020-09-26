@@ -6,6 +6,14 @@ logging:
     org.spring.framework.web: debug
 
 spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.apache.kafka.common.serialization.JsonSerializer
+      retries: 2
+      batch-size: 10
+
   application:
     name: user-service
   datasource:
@@ -22,4 +30,8 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:8080/.well-known/jwks.json
+
+com:
+  kafak:
+    user_creation_topic: user_creation_topic
 

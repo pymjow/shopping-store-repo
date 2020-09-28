@@ -1,4 +1,11 @@
 spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.apache.kafka.common.serialization.JsonSerializer
+      retries: 2
+      batch-size: 10
   datasource:
     url: jdbc:h2:mem:userdb
     driver-class-name: org.h2.Driver
@@ -14,3 +21,7 @@ spring:
         jwt:
           jwk-set-uri: http://localhost:8080/.well-known/jwks.json
 
+
+com:
+  kafka:
+    userCreationTopic: user_creation_topic

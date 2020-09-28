@@ -32,6 +32,6 @@ spring:
           jwk-set-uri: http://localhost:8080/.well-known/jwks.json
 
 com:
-  kafak:
-    user_creation_topic: user_creation_topic
+  kafka:
+    userCreationTopic: user_creation_topic
 

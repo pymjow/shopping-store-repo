@@ -20,7 +20,7 @@ public class UserCreationEventListener {
 
     @TransactionalEventListener
     public void publishUserCreatedEvent(UserCreatedEvent userCreatedEvent){
-        kafkaTemplate.send(userTopicsConfigProperties.getUserCreationTopic(),(UserCreatedEventData)userCreatedEvent.getSource());
+        kafkaTemplate.send("user_creation_topic",(UserCreatedEventData)userCreatedEvent.getSource());
     }
 
 }

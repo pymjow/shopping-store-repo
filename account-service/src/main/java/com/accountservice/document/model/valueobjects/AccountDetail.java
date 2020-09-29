@@ -11,6 +11,11 @@ public class AccountDetail {
     private LocalDate creationDate;
     private Boolean locked;
 
+    public AccountDetail(){
+        this.creationDate=LocalDate.now();
+        this.locked=false;
+    }
+
     @Column
     public LocalDate getCreationDate() {
         return creationDate;

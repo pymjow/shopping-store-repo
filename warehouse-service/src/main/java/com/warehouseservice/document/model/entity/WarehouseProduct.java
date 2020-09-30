@@ -52,4 +52,5 @@ public class WarehouseProduct {
     public void setWarehouseProductSpecification(WarehouseProductSpecification warehouseProductSpecification) {
         this.warehouseProductSpecification = warehouseProductSpecification;
     }
+
 }

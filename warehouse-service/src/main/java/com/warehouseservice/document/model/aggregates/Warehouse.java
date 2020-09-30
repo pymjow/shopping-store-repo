@@ -1,16 +1,18 @@
 package com.warehouseservice.document.model.aggregates;
 
-import com.warehouseservice.document.model.entity.WarehouseType;
+import com.warehouseservice.document.model.command.InsertProduct2WarehouseCommand;
+import com.warehouseservice.document.model.entity.WarehouseProduct;
 import com.warehouseservice.document.model.valueobjects.WareHouseSpecification;
+import com.warehouseservice.document.model.valueobjects.WarehouseProductSpecification;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import javax.persistence.*;
 
 @Entity
-public class Warehouse {
+public class Warehouse extends AbstractAggregateRoot<Warehouse> {
 
     private Long id;
     private WareHouseSpecification wareHouseSpecification;
-    private WarehouseType warehouseType;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,13 +33,16 @@ public class Warehouse {
         this.wareHouseSpecification = wareHouseSpecification;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "warehouse_type_id")
-    public WarehouseType getWarehouseType() {
-        return warehouseType;
+    public WarehouseProduct addProduct2Warehouse(InsertProduct2WarehouseCommand command){
+        WarehouseProduct warehouseProduct=new WarehouseProduct();
+        warehouseProduct.setWarehouse(this);
+        warehouseProduct.setWarehouseProductSpecification(new WarehouseProductSpecification());
+        return warehouseProduct;
     }
 
-    public void setWarehouseType(WarehouseType warehouseType) {
-        this.warehouseType = warehouseType;
+    public WarehouseProduct addProduct2Warehouse(WarehouseProduct warehouseProduct){
+        warehouseProduct.getWarehouseProductSpecification().increment();
+        return warehouseProduct;
     }
+
 }

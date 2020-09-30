@@ -1,6 +1,5 @@
 package com.warehouseservice.infrastructure;
 
-import com.warehouseservice.infrastructure.repositories.WarehouseTypeRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

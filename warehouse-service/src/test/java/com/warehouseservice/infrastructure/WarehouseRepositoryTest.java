@@ -1,10 +1,8 @@
 package com.warehouseservice.infrastructure;
 
 import com.warehouseservice.document.model.aggregates.Warehouse;
-import com.warehouseservice.document.model.entity.WarehouseType;
 import com.warehouseservice.document.model.valueobjects.WareHouseSpecification;
 import com.warehouseservice.infrastructure.repositories.WarehouseRepository;
-import com.warehouseservice.infrastructure.repositories.WarehouseTypeRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

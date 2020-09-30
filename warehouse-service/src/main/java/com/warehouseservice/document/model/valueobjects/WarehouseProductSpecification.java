@@ -8,6 +8,10 @@ public class WarehouseProductSpecification {
 
     private Integer count;
 
+    public WarehouseProductSpecification(){
+        this.count=1;
+    }
+
     @Column
     public Integer getCount() {
         return count;
@@ -16,4 +20,9 @@ public class WarehouseProductSpecification {
     public void setCount(Integer count) {
         this.count = count;
     }
+
+    public void increment(){
+        this.count++;
+    }
+
 }

@@ -64,6 +64,7 @@ public class Product {
         ProductDetail productDetail=new ProductDetail();
         productDetail.setDetailSpecification(createProductCommand.extractDetailSpecification());
         this.setProductDetail(productDetail);
+
     }
 
 }

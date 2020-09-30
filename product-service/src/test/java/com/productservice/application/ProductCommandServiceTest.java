@@ -1,17 +1,14 @@
 package com.productservice.application;
 
-import com.productservice.commandservice.ProductCommandService;
-import com.productservice.config.ResourceServerConfig;
+import com.productservice.application.internal.queryservice.commandservice.ProductCommandService;
 import com.productservice.document.model.aggregates.Product;
 import com.productservice.document.model.command.CreateProductCommand;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;

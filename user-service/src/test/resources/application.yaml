@@ -1,11 +1,18 @@
 spring:
-  kafka:
-    producer:
-      bootstrap-servers: localhost:9092
-      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
-      value-deserializer: org.apache.kafka.common.serialization.JsonSerializer
-      retries: 2
-      batch-size: 10
+  cloud:
+    stream:
+      bindings:
+        userCreationChannel:
+          destination: user_creation_topic
+          binder: local_kafka
+      binders:
+        local_kafka:
+          type: kafka
+          environment:
+            spring:
+              kafka:
+                host: localhost
+                port: 9092
   datasource:
     url: jdbc:h2:mem:userdb
     driver-class-name: org.h2.Driver
@@ -20,8 +27,3 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:8080/.well-known/jwks.json
-
-
-com:
-  kafka:
-    userCreationTopic: user_creation_topic

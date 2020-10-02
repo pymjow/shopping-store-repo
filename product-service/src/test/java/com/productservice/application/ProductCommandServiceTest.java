@@ -1,6 +1,6 @@
 package com.productservice.application;
 
-import com.productservice.application.internal.queryservice.commandservice.ProductCommandService;
+import com.productservice.application.internal.commandservice.ProductCommandService;
 import com.productservice.document.model.aggregates.Product;
 import com.productservice.document.model.command.CreateProductCommand;
 import org.assertj.core.api.Assertions;

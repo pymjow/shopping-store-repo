@@ -1,7 +1,7 @@
 package com.productservice.interfaces.rest;
 
+import com.productservice.application.internal.commandservice.ProductCommandService;
 import com.productservice.application.internal.queryservice.ProductQueryService;
-import com.productservice.application.internal.queryservice.commandservice.ProductCommandService;
 import com.productservice.document.model.aggregates.Product;
 import com.productservice.interfaces.rest.dto.CreateProductDto;
 import com.productservice.interfaces.rest.dto.ProductInquiryDto;

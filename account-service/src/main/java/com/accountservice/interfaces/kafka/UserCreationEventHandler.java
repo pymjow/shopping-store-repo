@@ -6,7 +6,6 @@ import com.accountservice.interfaces.kafka.transformer.CreateEvent2AccountComman
 import com.accountservice.shareddomain.event.UserCreatedEventData;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 

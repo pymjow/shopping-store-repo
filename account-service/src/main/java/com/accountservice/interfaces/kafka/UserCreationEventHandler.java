@@ -4,21 +4,24 @@ package com.accountservice.interfaces.kafka;
 import com.accountservice.application.commandservice.AccountCommandService;
 import com.accountservice.interfaces.kafka.transformer.CreateEvent2AccountCommandAssembler;
 import com.accountservice.shareddomain.event.UserCreatedEventData;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserCreationConsumer {
+@EnableBinding(UserEventSource.class)
+public class UserCreationEventHandler {
 
     private AccountCommandService accountCommandService;
 
-    public UserCreationConsumer(AccountCommandService accountCommandService){
+    public UserCreationEventHandler(AccountCommandService accountCommandService){
         this.accountCommandService = accountCommandService;
     }
 
 
-    @KafkaListener(topics = "${com.kafka.userCreationTopic:user_creation_topic}")
+    @StreamListener(target = UserEventSource.USER_CREATION)
     public void listenToUserCreation(@Payload UserCreatedEventData message){
         accountCommandService.createAccount(CreateEvent2AccountCommandAssembler.toCreateAccount(message));
     }

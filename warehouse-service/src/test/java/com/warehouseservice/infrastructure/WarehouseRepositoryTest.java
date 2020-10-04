@@ -18,9 +18,6 @@ public class WarehouseRepositoryTest {
     @Autowired
     private WarehouseRepository warehouseRepository;
 
-    @Autowired
-    private WarehouseTypeRepository warehouseTypeRepository;
-
     @Test
     public void fetchTest() {
         Assertions.assertThat(warehouseRepository.findAll().isEmpty()).isEqualTo(false);
@@ -29,7 +26,6 @@ public class WarehouseRepositoryTest {
     @Test
     public void saveTest() {
 
-        WarehouseType warehouseType = warehouseTypeRepository.getOne(1L);
 
         WareHouseSpecification wareHouseSpecification = new WareHouseSpecification();
         wareHouseSpecification.setCapacity(100);
@@ -37,7 +33,6 @@ public class WarehouseRepositoryTest {
         wareHouseSpecification.setWarehouseNumber("33232");
 
         Warehouse warehouse = new Warehouse();
-        warehouse.setWarehouseType(warehouseType);
         warehouse.setWareHouseSpecification(wareHouseSpecification);
 
         warehouse = warehouseRepository.save(warehouse);
